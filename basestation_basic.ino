@@ -69,6 +69,10 @@ void myinit(){
   simpleCMDs["MAGX"]=std::string("SYS:MGR~ACT:MAGX");
   simpleCMDs["MAGY"]=std::string("SYS:MGR~ACT:MAGY");
   simpleCMDs["MAGZ"]=std::string("SYS:MGR~ACT:MAGZ");
+
+  simpleCMDs["MOTORX"]=std::string("SYS:MGR~ACT:MOTORX");
+  simpleCMDs["MOTORY"]=std::string("SYS:MGR~ACT:MOTORY");
+  simpleCMDs["MOTORZ"]=std::string("SYS:MGR~ACT:MOTORZ");
   
   simpleCMDs["MAGDX"]=std::string("SYS:MGR~ACT:MAGDX");
   simpleCMDs["MAGDY"]=std::string("SYS:MGR~ACT:MAGDY");
