@@ -35,6 +35,11 @@ Now install the Libraries "RadioLib" and "ArduinoJson" from the Library Manager.
 
 When that is complete, download the Libraries Zip from the github and unzip and copy the directories under the Ardiono/libraries directory
 
+![image](https://user-images.githubusercontent.com/76666447/155701236-c647cba9-a813-4f9f-b536-a080d4334641.png)
+
+![image](https://user-images.githubusercontent.com/76666447/155701292-06d8d4e5-e231-4dd2-ab1c-ecff74d08b21.png)
+
+
 
 
 
