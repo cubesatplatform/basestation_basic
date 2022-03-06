@@ -194,40 +194,22 @@ void dataloop(){
 }
 
 unsigned long t=0;
-void loop(){
-  if(millis()>t+5000){
-    t=millis();
- //   writeconsoleln();writeconsole("Loop "); writeconsoleln((long)ESP.getFreeHeap());writeconsoleln(" -------------------------------------------   ");
-  }
-    
-    
-  kbloop();
-  radio.loop();   
-  //dataloop();
-  
-  if(MSG->ReceivedList.size()){
-  std::string d,d1,d2,d3,d4;
-  CMsg b = MSG->ReceivedList.back();
-  if((b.getTABLE()=="IR")&&(b.getOFFSET()=="4")){
-    
-    while(MSG->ReceivedList.size()){
-      CMsg m=MSG->ReceivedList.front();
-      MSG->ReceivedList.pop_front();
-      if(m.getTABLE()=="IR"){
-        if(m.getOFFSET()=="4")
-          d4=m.getDATA();
-        if(m.getOFFSET()=="3")
-          d3=m.getDATA();
-        if(m.getOFFSET()=="2")
-          d2=m.getDATA();
-        if(m.getOFFSET()=="1")
-          d1=m.getDATA();
-        if(m.getOFFSET()=="0")
-          d=m.getDATA();
-         }                     
-    }
 
-    
+std::string d,d1,d2,d3,d4;
+
+void processIR(CMsg &m){  
+  if(m.getOFFSET()=="4")
+    d4=m.getDATA();
+  if(m.getOFFSET()=="3")
+    d3=m.getDATA();
+  if(m.getOFFSET()=="2")
+    d2=m.getDATA();
+  if(m.getOFFSET()=="1")
+    d1=m.getDATA();
+  if(m.getOFFSET()=="0")
+    d=m.getDATA();
+
+  if(m.getOFFSET()=="4"){
     d+=d1;
     d+=d2;
     d+=d3;    
@@ -243,6 +225,58 @@ void loop(){
       
     }
     writeconsoleln("");
-  }   
-  }  
+  }
+}
+
+void processMSG(){  
+  if(MSG->ReceivedList.size()){
+
+    CMsg m=MSG->ReceivedList.front();
+    int pin=m.getParameter("SYS",4);
+    std::string  act=m.getACT();    
+    MSG->ReceivedList.pop_front();
+    if(m.getTABLE()=="IR") processIR(m);
+    
+ 
+     if(act=="ON") {                //SYS:13~PIN:ON
+      pinMode(pin, OUTPUT);
+      digitalWrite(pin,HIGH);
+      writeconsole(pin);    
+      writeconsoleln("  HIGH");    
+     }
+     if(act=="OFF") {               //SYS:13~PIN:OFF
+      //pinMode(pin, OUTPUT);
+      digitalWrite(pin,LOW);
+      writeconsole(pin);    
+      writeconsoleln("  LOW");    
+     }
+
+     if(act=="BLINK") {               //SYS:13~PIN:OFF
+      //pinMode(pin, OUTPUT);
+      for(auto count=0; count<20;count++){
+        digitalWrite(pin,HIGH);
+        delay(200);
+        digitalWrite(pin,LOW);
+        delay(200);
+        writeconsole(pin);    
+        writeconsoleln("  BLINK");    
+      }
+     }
+               
+  }
+}
+
+void loop(){
+  if(millis()>t+5000){
+    t=millis();
+ //   writeconsoleln();writeconsole("Loop "); writeconsoleln((long)ESP.getFreeHeap());writeconsoleln(" -------------------------------------------   ");
+  }
+    
+    
+  kbloop();
+  radio.loop();   
+  processMSG();
+  //dataloop();
+  
+
 }
