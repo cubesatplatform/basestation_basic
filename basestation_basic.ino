@@ -42,9 +42,7 @@ void myinit(){
  
   simpleCMDs[std::string("phonegps")]=std::string("SYS:PHONE~ACT:CGPS~ACK:0");
   simpleCMDs[std::string("phonetime")]=std::string("SYS:PHONE~ACT:CTIME~ACK:0");
-  simpleCMDs[std::string("photo")]=std::string("SYS:PHONE~ACT:CPHOTO(B,50%,100,100,AUTO)");
-  simpleCMDs[std::string("imuspi")]=std::string("SYS:IMUSPI~ACT:START");  
-  simpleCMDs[std::string("imui2c")]=std::string("SYS:IMUI2C~ACT:START");  
+  simpleCMDs[std::string("photo")]=std::string("SYS:PHONE~ACT:CPHOTO(B,50%,100,100,AUTO)");    
   simpleCMDs[std::string("light")]=std::string("SYS:LIGHT~ACT:START");  
   simpleCMDs[std::string("acktest")]=std::string("SYS:SAT~ACT:OUTPUT~ACK:0~D:000000000000000000000000111111111111111111111111111111111222222222222222222222222222223333333333333333333333333333333444444444444444444444444444444444444555555555555555555555555555555555556666666666666666666666666666677777777777777777777777777777777777778888888888888888888888888888888888999999999999999999999999999999999"); 
  
@@ -82,13 +80,36 @@ void myinit(){
   simpleCMDs["phoneon"]=std::string("SYS:MGR~ACT:PHONEON");
   simpleCMDs["phoneoff"]=std::string("SYS:MGR~ACT:PHONEOFF");
   simpleCMDs["burn"]=std::string("SYS:MGR~ACT:BURN");
-  simpleCMDs["imuspi"]=std::string("SYS:MGR~ACT:IMUSPI");
-  simpleCMDs["imu0"]=std::string("SYS:MGR~ACT:IMU0");
-  simpleCMDs["imu1"]=std::string("SYS:MGR~ACT:IMU1");
-  simpleCMDs["imu2"]=std::string("SYS:MGR~ACT:IMU2");
+  
+  simpleCMDs["imuspi"]=std::string("SYS:IMUSPI~ACT:START");  
+  simpleCMDs["imui2c"]=std::string("SYS:IMUI2C~ACT:START");
+  
+  simpleCMDs["imui2ct"]=std::string("SYS:MGR~ACT:IMUI2C");
+  simpleCMDs["imuspit"]=std::string("SYS:MGR~ACT:IMUSPI");
+  
   simpleCMDs["i2c0"]=std::string("SYS:MGR~ACT:I2C0");
   simpleCMDs["i2c1"]=std::string("SYS:MGR~ACT:I2C1");
   simpleCMDs["i2c2"]=std::string("SYS:MGR~ACT:I2C2");
+
+  simpleCMDs["irx1"]=std::string("SYS:MGR~ACT:IRX1");
+  simpleCMDs["irx2"]=std::string("SYS:MGR~ACT:IRX2");
+  simpleCMDs["iry1"]=std::string("SYS:MGR~ACT:IRY1");
+  simpleCMDs["iry2"]=std::string("SYS:MGR~ACT:IRY2");
+  simpleCMDs["irz1"]=std::string("SYS:MGR~ACT:IRZ1");
+  simpleCMDs["irz2"]=std::string("SYS:MGR~ACT:IRZ2");
+
+  simpleCMDs["tempx1"]=std::string("SYS:MGR~ACT:TEMPX1");
+  simpleCMDs["tempy1"]=std::string("SYS:MGR~ACT:TEMPY1");
+  simpleCMDs["tempz1"]=std::string("SYS:MGR~ACT:TEMPZ1");
+
+  simpleCMDs["tempx2"]=std::string("SYS:MGR~ACT:TEMPX2");
+  simpleCMDs["tempy2"]=std::string("SYS:MGR~ACT:TEMPY2");
+  simpleCMDs["tempz2"]=std::string("SYS:MGR~ACT:TEMPZ2");
+
+  simpleCMDs["tempobc"]=std::string("SYS:MGR~ACT:TEMPOBC");
+  simpleCMDs["tempadcs"]=std::string("SYS:MGR~ACT:TEMPADCS");
+  
+
   simpleCMDs["H"]=std::string("SYS:MGR~ACT:H4");
   simpleCMDs["L"]=std::string("SYS:MGR~ACT:L4");
   simpleCMDs["W"]=std::string("SYS:MGR~ACT:PWM4");
