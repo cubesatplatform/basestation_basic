@@ -65,9 +65,9 @@ void myinit(){
   simpleCMDs["magy"]=std::string("SYS:MGR~ACT:MAGY");
   simpleCMDs["magz"]=std::string("SYS:MGR~ACT:MAGZ");
 
-  simpleCMDs["motorx"]=std::string("SYS:MGR~ACT:MOTORX");
-  simpleCMDs["motory"]=std::string("SYS:MGR~ACT:MOTORY");
-  simpleCMDs["motorz"]=std::string("SYS:MGR~ACT:MOTORZ");
+  simpleCMDs["motorx"]=std::string("SYS:MGR~ACT:MOTORX~SETPOINT:2767~MODE:PWM~DURATION:10000");  //SPEED  SIMPLE  ROTATION RAMP  PWM
+  simpleCMDs["motory"]=std::string("SYS:MGR~ACT:MOTORY~SETPOINT:2767~MODE:PWM~DURATION:10000");
+  simpleCMDs["motorz"]=std::string("SYS:MGR~ACT:MOTORZ~SETPOINT:2767~MODE:PWM~DURATION:10000");
   
   simpleCMDs["magdx"]=std::string("SYS:MGR~ACT:MAGDX");
   simpleCMDs["magdy"]=std::string("SYS:MGR~ACT:MAGDY");
