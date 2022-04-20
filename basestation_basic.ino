@@ -107,9 +107,12 @@ void myinit(){
   simpleCMDs["tempz2"]=std::string("SYS:MGR~ACT:TEMPZ2");
 
   simpleCMDs["tempobc"]=std::string("SYS:MGR~ACT:TEMPOBC");
-  simpleCMDs["tempadcs"]=std::string("SYS:MGR~ACT:TEMPADCS");
+  simpleCMDs["switchradios"]=std::string("SYS:SAT~ACT:UPDATERADIOS~TRANSMITTER:RADIO");
+  simpleCMDs["switchradios2"]=std::string("SYS:SAT~ACT:UPDATERADIOS~TRANSMITTER:RADIO2");
+  simpleCMDs["sleepradios"]=std::string("SYS:SAT~ACT:UPDATERADIOS~SLEEP:RADIO");
+  simpleCMDs["sleepradios2"]=std::string("SYS:SAT~ACT:UPDATERADIOS~SLEEP:RADIO2");
   
-
+ 
   simpleCMDs["H"]=std::string("SYS:MGR~ACT:H4");
   simpleCMDs["L"]=std::string("SYS:MGR~ACT:L4");
   simpleCMDs["W"]=std::string("SYS:MGR~ACT:PWM4");
@@ -199,7 +202,10 @@ void setup() {
       myinit();
    // sendSerial("Init");
    // radio.setMessages(&MSG);
+      radio.Name("RADIO2");
+      
       radio.setup();
+      radio.setTransmitter(true);
       delay(1000);
 }
 
