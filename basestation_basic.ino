@@ -21,12 +21,15 @@ void myinit(){
   radio.setACK(false);
   writeconsoleln("Starting Basestation BASIC: ");
 
-  simpleCMDs[std::string("normal")]=std::string("SYS:SAT~ACT:NORMAL~ACK:0");
-  simpleCMDs[std::string("lowpower")]=std::string("SYS:SAT~ACT:LOWPOWER~ACK:0");
-  simpleCMDs[std::string("deploy")]=std::string("SYS:SAT~ACT:DEPLOY~ACK:0");  
-  simpleCMDs[std::string("adcs")]=std::string("SYS:SAT~ACT:ADCS~ACK:0");
-  simpleCMDs[std::string("detumble")]=std::string("SYS:SAT~ACT:DETUMBLE~ACK:0");
-  simpleCMDs[std::string("payload")]=std::string("SYS:SAT~ACT:PAYLOAD~ACK:0");
+  simpleCMDs[std::string("normal")]=std::string("SYS:SAT~ACT:NEWSTATE~V:NORMAL~ACK:0");
+  simpleCMDs[std::string("lowpower")]=std::string("SYS:SAT~ACT:NEWSTATE~V:LOWPOWER~ACK:0");
+  simpleCMDs[std::string("deploy")]=std::string("SYS:SAT~ACT:NEWSTATE~V:DEPLOY~ACK:0");  
+  simpleCMDs[std::string("adcs")]=std::string("SYS:SAT~ACT:NEWSTATE~V:ADCS~ACK:0");
+  simpleCMDs[std::string("detumble")]=std::string("SYS:SAT~ACT:NEWSTATE~V:DETUMBLE~ACK:0");
+  simpleCMDs[std::string("payload")]=std::string("SYS:SAT~ACT:NEWSTATE~V:PAYLOAD~ACK:0");
+  simpleCMDs[std::string("alex")]=std::string("SYS:SAT~ACT:NEWSTATE~V:ALEX~ACK:0");
+  simpleCMDs[std::string("addalex")]=std::string("SYS:SAT~ACT:ADDSTATE~V:ALEX~ACK:0");
+  simpleCMDs[std::string("addgps")]=std::string("SYS:ALEX~ACT:ADDSYSTEM~V:GPS~ACK:0");
 
   simpleCMDs[std::string("stats")]=std::string("SYS:SAT~ACT:STATS~ACK:0");
   simpleCMDs[std::string("reset")]=std::string("SYS:SAT~ACT:RESET~ACK:0");
@@ -170,26 +173,22 @@ void sendSerial(const char* cmd) {    //Send to Phone
 }
 
 
-void SendCmd(std::string str){
-  
-    std::string cmd=simpleCMDs[str];
-    if(cmd.size()>1){
-      CMsg m(cmd);
+void SendCmd(std::string str){  
+  std::string cmd=simpleCMDs[str];
+  if(cmd.size()>1){
+    CMsg m(cmd);
+    
+    writeconsoleln(m.serialize());
+    radio.addTransmitList(m);   
+  }
+  else{
+    if(str.size()>1){
+      CMsg m(str);
       
-      writeconsoleln(m.serialize());
-      radio.addTransmitList(m);   
-      //sendSerial(cmd.c_str());
+      radio.addTransmitList(m);         
     }
-    else{
-      if(str.size()>1){
-        CMsg m(str);
-        
-        radio.addTransmitList(m);         
-        //sendSerial(str.c_str());
-      }
-    }      
+  }      
 }    
-
 
 
 void kbloop() {
