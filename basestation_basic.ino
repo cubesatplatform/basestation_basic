@@ -10,7 +10,10 @@ char input;
 std::string cmdstr;
 long last=0;
 int id=0;
-std::string CSystemObject::_sat="ADR1";
+
+#define CUBESAT "ADR1"
+std::string CSystemObject::_IAM="BS1";
+std::string CSystemObject::_defaultTO=CUBESAT;
 std::map<std::string,CSystemObject *> SysMap;
 std::map<std::string, std::string> simpleCMDs;
 CMessages* MSG=new CMessages();
@@ -179,12 +182,13 @@ void SendCmd(std::string str){
     CMsg m(cmd);
     
     writeconsoleln(m.serialize());
+    m.setTO(CUBESAT);
     radio.addTransmitList(m);   
   }
   else{
     if(str.size()>1){
       CMsg m(str);
-      
+      m.setTO(CUBESAT);  
       radio.addTransmitList(m);         
     }
   }      
