@@ -11,9 +11,9 @@ std::string cmdstr;
 long last=0;
 int id=0;
 
-#define CUBESAT "BS1"
-std::string CSystemObject::_IAM="BS2";
-std::string CSystemObject::_defaultTO="BS1";
+#define CUBESAT "BS2"
+std::string CSystemObject::_IAM="BS1";
+std::string CSystemObject::_defaultTO="BS2";
 std::map<std::string,CSystemObject *> SysMap;
 std::map<std::string, std::string> simpleCMDs;
 CMessages* MSG=new CMessages();
