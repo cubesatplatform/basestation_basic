@@ -11,9 +11,9 @@ std::string cmdstr;
 long last=0;
 int id=0;
 
-#define CUBESAT "ADR1"
-std::string CSystemObject::_IAM="BS1";
-std::string CSystemObject::_defaultTO=CUBESAT;
+#define CUBESAT "BS1"
+std::string CSystemObject::_IAM="BS2";
+std::string CSystemObject::_defaultTO="BS1";
 std::map<std::string,CSystemObject *> SysMap;
 std::map<std::string, std::string> simpleCMDs;
 CMessages* MSG=new CMessages();
@@ -33,6 +33,10 @@ void myinit(){
   simpleCMDs[std::string("alex")]=std::string("SYS:SAT~ACT:NEWSTATE~V:ALEX~ACK:0");
   simpleCMDs[std::string("addalex")]=std::string("SYS:SAT~ACT:ADDSTATE~V:ALEX~ACK:0");
   simpleCMDs[std::string("addgps")]=std::string("SYS:ALEX~ACT:ADDSYSTEM~V:GPS~ACK:0");
+
+  simpleCMDs[std::string("set")]=std::string("SYS:RELAY~to:all~V:Hello World~ACK:0");
+  simpleCMDs[std::string("get")]=std::string("SYS:RELAY~ACT:GET~to:all~ACK:0");
+  
 
   simpleCMDs[std::string("stats")]=std::string("SYS:SAT~ACT:STATS~ACK:0");
   simpleCMDs[std::string("reset")]=std::string("SYS:SAT~ACT:RESET~ACK:0");
