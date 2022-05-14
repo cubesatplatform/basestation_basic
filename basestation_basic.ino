@@ -11,9 +11,9 @@ std::string cmdstr;
 long last=0;
 int id=0;
 
-#define CUBESAT "BS2"
-std::string CSystemObject::_IAM="BS1";
-std::string CSystemObject::_defaultTO="BS2";
+#define CUBESAT "ADR1"
+std::string CSystemObject::_IAM="BS2";
+std::string CSystemObject::_defaultTO="ADR1";
 std::map<std::string,CSystemObject *> SysMap;
 std::map<std::string, std::string> simpleCMDs;
 CMessages* MSG=new CMessages();
@@ -84,8 +84,6 @@ void myinit(){
   simpleCMDs["chkrotation"]=std::string("SYS:MGR~ACT:CHKROTATION");
   simpleCMDs["chkmessages"]=std::string("SYS:MGR~ACT:CHKMESSAGES");
   
-
-
   
   simpleCMDs["radio"]=std::string("SYS:MGR~ACT:RADIO");
   simpleCMDs["mag"]=std::string("SYS:MGR~ACT:MAG");
@@ -211,7 +209,6 @@ void kbloop() {
         }
         if((input !='\n')&&(input !=' ')) cmdstr+=input;              
     }
-
   //while(Serial2.available())   Serial2.print(Serial2.read());
 
   if(input =='\n'){
@@ -294,24 +291,24 @@ void processMSG(){
     int pin=m.getParameter("SYS",4);
     std::string  act=m.getACT();    
     MSG->ReceivedList.pop_front();
-    if(m.getTABLE()=="IR") processIR(m);
+    if(m.getTABLE()=="IR") 
+      processIR(m);
     
- 
-     if(act=="ON") {                //SYS:13~PIN:ON
+    if(act=="ON") {                //SYS:13~PIN:ON
       pinMode(pin, OUTPUT);
       digitalWrite(pin,HIGH);
       writeconsole(pin);    
       writeconsoleln("  HIGH");    
-     }
-     if(act=="OFF") {               //SYS:13~PIN:OFF
+    }
+    if(act=="OFF") {               //SYS:13~PIN:OFF
       //pinMode(pin, OUTPUT);
       digitalWrite(pin,LOW);
       writeconsole(pin);    
       writeconsoleln("  LOW");    
-     }
-
-     if(act=="BLINK") {               //SYS:13~PIN:OFF
-      //pinMode(pin, OUTPUT);
+    }
+    
+    if(act=="BLINK") {               //SYS:13~PIN:OFF
+    //pinMode(pin, OUTPUT);
       for(auto count=0; count<20;count++){
         digitalWrite(pin,HIGH);
         delay(200);
@@ -320,16 +317,12 @@ void processMSG(){
         writeconsole(pin);    
         writeconsoleln("  BLINK");    
       }
-     }
-               
+    }               
   }
 }
 
 
-
 void loop(){
-
-
   if(millis()>t+5000){
     t=millis();
  //   writeconsoleln();writeconsole("Loop "); writeconsoleln((long)ESP.getFreeHeap());writeconsoleln(" -------------------------------------------   ");
@@ -338,6 +331,4 @@ void loop(){
   radio.loop();   
   processMSG();
   //dataloop();
-  
-
 }
