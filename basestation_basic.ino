@@ -145,6 +145,8 @@ void myinit(){
   simpleCMDs["tempz2"]=std::string("SYS:MGR~ACT:TEMPZ2");
 
   simpleCMDs["tempobc"]=std::string("SYS:MGR~ACT:TEMPOBC");
+  simpleCMDs["enablei2c"]=std::string("SYS:MGR~ACT:ENABLEI2C");
+  simpleCMDs["disablei2c"]=std::string("SYS:MGR~ACT:DISABLEI2C");
    
   simpleCMDs["H"]=std::string("SYS:MGR~ACT:H4");
   simpleCMDs["L"]=std::string("SYS:MGR~ACT:L4");
@@ -328,7 +330,7 @@ void loop(){
  //   writeconsoleln();writeconsole("Loop "); writeconsoleln((long)ESP.getFreeHeap());writeconsoleln(" -------------------------------------------   ");
   }
   kbloop();
-  radio.loop();   
+  radio.Run();   
   processMSG();
   //dataloop();
 }
