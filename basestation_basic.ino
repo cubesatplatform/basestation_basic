@@ -83,6 +83,9 @@ void myinit(){
   simpleCMDs["chkbattery"]=std::string("SYS:MGR~ACT:CHKBATTERY");
   simpleCMDs["chkrotation"]=std::string("SYS:MGR~ACT:CHKROTATION");
   simpleCMDs["chkmessages"]=std::string("SYS:MGR~ACT:CHKMESSAGES");
+  simpleCMDs["chkirarrays"]=std::string("SYS:MGR~ACT:CHKIRARRAYS");
+
+  simpleCMDs["filldata"]=std::string("SYS:MGR~ACT:FILLDATA");
   
   
   simpleCMDs["radio"]=std::string("SYS:MGR~ACT:RADIO");
