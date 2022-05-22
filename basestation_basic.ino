@@ -89,6 +89,12 @@ void myinit(){
   
   
   simpleCMDs["radio"]=std::string("SYS:MGR~ACT:RADIO");
+  simpleCMDs["highbw"]=std::string("SYS:RADIO~ACT:MODEM~VAL:HIGHBW");
+  simpleCMDs["mediumbw"]=std::string("SYS:RADIO~ACT:MODEM~VAL:MEDIUMBW");
+  simpleCMDs["lowbw"]=std::string("SYS:RADIO~ACT:MODEM~VAL:LOWBW");
+  simpleCMDs["normalbw"]=std::string("SYS:RADIO~ACT:MODEM");
+
+  
   simpleCMDs["mag"]=std::string("SYS:MGR~ACT:MAG");
   simpleCMDs["magx"]=std::string("SYS:MGR~ACT:MAGX");
   simpleCMDs["magy"]=std::string("SYS:MGR~ACT:MAGY");
