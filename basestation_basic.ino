@@ -89,10 +89,10 @@ void myinit(){
   
   
   simpleCMDs["radio"]=std::string("SYS:MGR~ACT:RADIO");
-  simpleCMDs["highbw"]=std::string("SYS:RADIO~ACT:MODEM~VAL:HIGHBW");
-  simpleCMDs["mediumbw"]=std::string("SYS:RADIO~ACT:MODEM~VAL:MEDIUMBW");
+  simpleCMDs["highbw"]=std::string("SYS:RADIO2~ACT:MODEM~VAL:HIGHBW");
+  simpleCMDs["mediumbw"]=std::string("SYS:RADIO2~ACT:MODEM~VAL:MEDIUMBW");
   simpleCMDs["lowbw"]=std::string("SYS:RADIO~ACT:MODEM~VAL:LOWBW");
-  simpleCMDs["normalbw"]=std::string("SYS:RADIO~ACT:MODEM");
+  simpleCMDs["normalbw"]=std::string("SYS:RADIO2~ACT:MODEM");
 
   
   simpleCMDs["mag"]=std::string("SYS:MGR~ACT:MAG");
@@ -108,15 +108,17 @@ void myinit(){
   simpleCMDs["magdy"]=std::string("SYS:MGR~ACT:MAGDY");
   simpleCMDs["magdz"]=std::string("SYS:MGR~ACT:MAGDZ");
 
-  simpleCMDs["adcson"]=std::string("SYS:MGR~ACT:ADCSON");
-  simpleCMDs["adcsoff"]=std::string("SYS:MGR~ACT:ADCSOFF");
+  simpleCMDs["mblogic"]=std::string("SYS:MGR~ACT:MBLOGICON");
+  simpleCMDs["mblogicoff"]=std::string("SYS:MGR~ACT:MBLOGICOFF");
 
-  simpleCMDs["sensorson"]=std::string("SYS:MGR~ACT:SENSORSSON");
+  simpleCMDs["sensorson"]=std::string("SYS:MGR~ACT:SENSORSON");
   simpleCMDs["sensorsoff"]=std::string("SYS:MGR~ACT:SENSORSOFF");
 
-  simpleCMDs["magsmotorson"]=std::string("SYS:MGR~ACT:MAGSMOTORSON");
-  simpleCMDs["magsmotorsoff"]=std::string("SYS:MGR~ACT:MAGSMOTORSOFF");
+  simpleCMDs["65Von"]=std::string("SYS:MGR~ACT:65VON");
+  simpleCMDs["65Voff"]=std::string("SYS:MGR~ACT:65VOFF");
   
+  simpleCMDs["allon"]=std::string("SYS:MGR~ACT:ALLON");
+  simpleCMDs["alloff"]=std::string("SYS:MGR~ACT:ALLOFF");
   
   simpleCMDs["pinson"]=std::string("SYS:MGR~ACT:PINSON");
   simpleCMDs["pinsoff"]=std::string("SYS:MGR~ACT:PINSOFF");
@@ -189,6 +191,23 @@ void sendSerial(const char* cmd) {    //Send to Phone
 }
 
 
+void updateRadio(CMsg &m){
+  std::string sys=m.getSYS();
+  std::string act=m.getACT();
+  std::string val=m.getVALUE();
+
+  if(act!="MODEM") return;
+  unsigned long ct=getTime();
+  while(getTime()<ct+2000){
+    processMSG();
+    radio.Run(); 
+  }
+
+  radio.setModem(m);
+  radio.Run(100); 
+}
+
+
 void SendCmd(std::string str){  
   std::string cmd=simpleCMDs[str];
   if(cmd.size()>1){
@@ -196,13 +215,15 @@ void SendCmd(std::string str){
     
     writeconsoleln(m.serialize());
     m.setTO(CUBESAT);
-    radio.addTransmitList(m);   
+    radio.addTransmitList(m); 
+    updateRadio(m);  
   }
   else{
     if(str.size()>1){
       CMsg m(str);
       m.setTO(CUBESAT);  
       radio.addTransmitList(m);         
+      updateRadio(m);  
     }
   }      
 }    
