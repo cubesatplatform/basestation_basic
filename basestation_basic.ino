@@ -103,6 +103,8 @@ void myinit(){
   simpleCMDs["motorx"]=std::string("SYS:MGR~ACT:MOTORX~SETPOINT:2767~MODE:PWM~DURATION:10000");  //SPEED  SIMPLE  ROTATION RAMP  PWM
   simpleCMDs["motory"]=std::string("SYS:MGR~ACT:MOTORY~SETPOINT:2767~MODE:PWM~DURATION:10000");
   simpleCMDs["motorz"]=std::string("SYS:MGR~ACT:MOTORZ~SETPOINT:2767~MODE:PWM~DURATION:10000");
+
+  simpleCMDs["newmode"]=std::string("SYS:MOTORX~ACT:NEWMODE~MODE:PWM~SETPOINT:1600~DURATION:10000");
   
   simpleCMDs["magdx"]=std::string("SYS:MGR~ACT:MAGDX");
   simpleCMDs["magdy"]=std::string("SYS:MGR~ACT:MAGDY");
