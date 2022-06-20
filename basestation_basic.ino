@@ -5,6 +5,10 @@
 #include <boards.h>
 #include <radio.h>
 
+#include <sdfs.h>
+
+
+
 
 char input;
 std::string cmdstr;
@@ -125,8 +129,7 @@ void myinit(){
   simpleCMDs["pinson"]=std::string("SYS:MGR~ACT:PINSON");
   simpleCMDs["pinsoff"]=std::string("SYS:MGR~ACT:PINSOFF");
   simpleCMDs["phoneon"]=std::string("SYS:MGR~ACT:PHONEON");
-  simpleCMDs["phoneoff"]=std::string("SYS:MGR~ACT:PHONEOFF");
-  simpleCMDs["burn"]=std::string("SYS:MGR~ACT:BURN");
+  simpleCMDs["phoneoff"]=std::string("SYS:MGR~ACT:PHONEOFF");  
   
   simpleCMDs["imuspi"]=std::string("SYS:IMUSPI~ACT:START");  
   simpleCMDs["imui2c"]=std::string("SYS:IMUI2C~ACT:START");
