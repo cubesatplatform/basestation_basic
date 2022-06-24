@@ -228,9 +228,18 @@ void SendCmd(std::string str){
   else{
     if(str.size()>1){
       CMsg m(str);
-      m.setTO(CUBESAT);  
-      radio.addTransmitList(m);         
-      updateRadio(m);  
+      
+
+      if((m.getTO()==radio.getIAM())||(m.getTO()=="BSALL")){
+        std::string act=m.getACT();
+        if(act=="SENDFILE") sendFile(m);
+        
+      }
+      else {
+        m.setTO(CUBESAT);  
+        radio.addTransmitList(m);         
+        updateRadio(m);  
+      }
     }
   }      
 }    
@@ -278,20 +287,31 @@ void setup() {
 
       connectWifi();
 
-      int counter=0;
-      std::string path="/dev/test/update";
-      path+=tostring(counter);
-      path+=".bin";
-    
-      sendRequestGet(path.c_str());
-      CMsg m=receiveFile();
-
-      m.setTO(CUBESAT);
-      radio.addTransmitList(m); 
-      updateRadio(m);  
+  
 }
 
 unsigned long dlast=0;
+
+void sendFile(CMsg &msg){
+  writeconsoleln("Called Send File");
+  int chunk=0;
+  std::string path="/dev/test/update";
+
+  path=msg.getParameter("PATH",path);
+  chunk=msg.getParameter("CHUNK",chunk);
+  
+  path+=tostring(chunk);
+  path+=".bin";
+
+  sendRequestGet(path.c_str());
+  CMsg m=receiveFile();
+
+  m.setTO(CUBESAT);
+  radio.addTransmitList(m); 
+  updateRadio(m);  
+}
+
+
 void dataloop(){
   if (millis()>dlast+20){
     dlast=millis();

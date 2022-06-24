@@ -46,9 +46,10 @@ void sendRequestGet(const char *page,const char *server,int port){
 }  
 
 CMsg receiveFile() {
+  Serial.println("CMsg receiveFile()");
   CMsg m;
   int maxloops = 0;
-  char buffer[500];
+  unsigned char buffer[500];
 
   //wait for the server's reply to become available
   while (!client.available() && maxloops < 1500)
@@ -72,7 +73,7 @@ CMsg receiveFile() {
       //Serial.println("Got something........................");
   
       char c = client.read();      
-      //Serial.write(c);
+      Serial.write(c);
       buffer[count]=c;
       count++;
     }
@@ -80,10 +81,11 @@ CMsg receiveFile() {
     if(count>20){
       buffer[count]=NULL;
       buffer[19]=NULL;
-      std::string filename=buffer;
+      std::string filename=(char *)buffer;
       Serial.print(filename.c_str());
-      Serial.println(buffer+21);   //Should be 20  error
+      Serial.println((char *)buffer+21);   //Should be 20  error
       m.setParameter("FILENAME",filename);
+      m.initArray(buffer+21, count-21);
     }
 
     client.stop();
