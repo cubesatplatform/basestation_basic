@@ -7,6 +7,8 @@
 
 #include <sdfs.h>
 
+#include "mywifi.h"
+
 
 
 
@@ -273,6 +275,20 @@ void setup() {
       radio.setup();
       radio.setTransmitter(true);
       delay(1000);
+
+      connectWifi();
+
+      int counter=0;
+      std::string path="/dev/test/update";
+      path+=tostring(counter);
+      path+=".bin";
+    
+      sendRequestGet(path.c_str());
+      CMsg m=receiveFile();
+
+      m.setTO(CUBESAT);
+      radio.addTransmitList(m); 
+      updateRadio(m);  
 }
 
 unsigned long dlast=0;
