@@ -230,7 +230,7 @@ void SendCmd(std::string str){
       CMsg m(str);
       
 
-      if((m.getTO()==radio.getIAM())||(m.getTO()=="BSALL")){
+      if((m.getTO()==radio.getIAM())||(m.getTO()=="BSALL")){  //TO:BSALL~ACT:SENDFILE
         std::string act=m.getACT();
         if(act=="SENDFILE") sendFile(m);
         
@@ -293,10 +293,11 @@ void setup() {
 unsigned long dlast=0;
 
 void sendFile(CMsg &msg){
+
   writeconsoleln("Called Send File");
   int chunk=0;
   std::string path="/dev/test/update";
-
+ 
   path=msg.getParameter("PATH",path);
   chunk=msg.getParameter("CHUNK",chunk);
   
@@ -307,8 +308,10 @@ void sendFile(CMsg &msg){
   CMsg m=receiveFile();
 
   m.setTO(CUBESAT);
-  radio.addTransmitList(m); 
+  radio.addTransmitList(m);    
   updateRadio(m);  
+
+
 }
 
 

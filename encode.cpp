@@ -66,7 +66,7 @@ String urlencode(String str)
         code0=c+'0';
         if (c > 9){
             code0=c - 10 + 'A';
-        }
+        } 
         code2='\0';
         encodedString+='%';
         encodedString+=code0;

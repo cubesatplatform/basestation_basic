@@ -46,10 +46,10 @@ void sendRequestGet(const char *page,const char *server,int port){
 }  
 
 CMsg receiveFile() {
-  Serial.println("CMsg receiveFile()");
+  Serial.println("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv CMsg receiveFile()vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv");
   CMsg m;
   int maxloops = 0;
-  unsigned char buffer[500];
+  unsigned char buffer[500]={NULL};
 
   //wait for the server's reply to become available
   while (!client.available() && maxloops < 1500)
@@ -59,39 +59,56 @@ CMsg receiveFile() {
   }  
   // if there are incoming bytes available
   // from the server, read them and print them:
-
+  char c;
   if(client.available()){
     while (client.available()) {  //Clears out headers
       String line = client.readStringUntil('\r');
       //Serial.print(line);      Serial.print("   =>");      Serial.print(line.length());
-      if (line.length()<=1)
+      if (line.length()<=1){
+        c = client.read();      
         break;  
+      }
     }
 
     int count=0;
+    
     while (client.available()&&(count<250)) {
-      //Serial.println("Got something........................");
-  
-      char c = client.read();      
-      Serial.write(c);
+      c = client.read();      
+      //Serial.write(c);
       buffer[count]=c;
       count++;
     }
 
-    if(count>20){
-      buffer[count]=NULL;
-      buffer[19]=NULL;
-      std::string filename=(char *)buffer;
-      Serial.print(filename.c_str());
-      Serial.println((char *)buffer+21);   //Should be 20  error
-      m.setParameter("FILENAME",filename);
-      m.initArray(buffer+21, count-21);
+    if(count>20){  
+      Serial.println("  InitArray");
+      m.initArray(buffer, count);
     }
 
     client.stop();
   }
 
   delay(100);
+  Serial.println();Serial.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ CMsg receiveFile()^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
   return m;
  
 }
+
+/*
+void printWifiStatus() {
+  // print the SSID of the network you're attached to:
+  Serial.print("SSID: ");
+  Serial.println(WiFi.SSID());
+
+  // print your WiFi shield's IP address:
+  IPAddress ip = WiFi.localIP();
+  Serial.print("IP Address: ");
+  Serial.println(ip);
+
+  // print the received signal strength:
+  long rssi = WiFi.RSSI();
+  Serial.print("signal strength (RSSI):");
+  Serial.print(rssi);
+  Serial.println(" dBm");
+}
+
+*/
