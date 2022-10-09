@@ -1,9 +1,10 @@
- #include <stateobj.h>
-//#include <encode.h>
+#include <stateobj.h>
+#include <system_gps.h>
 #include <radio.h>
 #include <msg.h>
 #include <cloud.h>
 #include <system_mgr.h>
+#include <scheduler.h>
 #include <kb.h>
 
 
@@ -23,6 +24,10 @@ public:
   CBSOperations bsoperations;
   CMessages MSG;
   CSystemMgr mgr;
+  CScheduler sch;
+  CGPS gps;
   
   CBaseStation();
+
+  void callCustomFunctions(CMsg &msg);
 };
