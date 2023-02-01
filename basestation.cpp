@@ -4,10 +4,11 @@ CBaseStation::CBaseStation(){
   
   addSystem(&_keyboard);
   addSystem(&_phone);
-  
- // addSystem(&_scheduler);
-  addSystem(&_ir_X1);
   addSystem(&_messages);
+//  
+ // addSystem(&_scheduler);
+  //addSystem(&_ir_X1);
+  
   //addSystem(&_manager);  
   
   _phone.setMirrorCloud(true);  
@@ -16,14 +17,14 @@ CBaseStation::CBaseStation(){
  
   //addSystem(&_IMUI2C); 
  //_motorX.Mode(_LOCK);
- // addSystem(&_radio);  
+  addSystem(&_radio);  
  
-//  addSystem(&_cloud);
+  addSystem(&_cloud);
  // addSystem(&_pincontroller);
 
 
 
-  addSystem(&_magX);
+ // addSystem(&_magX);
 //  addSystem(&_magnetorquer);
  /*
   
