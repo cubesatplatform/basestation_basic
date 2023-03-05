@@ -2,14 +2,15 @@
 
 #include <stateobj.h>
 #include <kb.h>
-#include <phone.h>
 #include <msgpump.h>
 #include <radio.h>
-#include <cloud.h>
+#include <system_gps.h>
 
+//#include <cloud.h>
+//#include <phone.h>
 
 //#include <system_irarray.h>
-//#include <system_gps.h>
+
 //#include <scheduler.h>
 //#include <system_mgr.h>
 //#include <system_magtorquer.h>
@@ -34,9 +35,12 @@ private:
 public:
   CKeyboard _keyboard;
   CRadio _radio;  
-  CPhone _phone;  
+  
   CMsgPump _msgpump;
-  CCloud _cloud;  
+  CGPS _tbeamgps;
+
+  //CPhone _phone;  
+  //CCloud _cloud;  
   
   //CSystemMgr _manager;
   //CIRArray _ir_X1;  
@@ -45,7 +49,7 @@ public:
   //CIMU _IMUI2C;   
   
   /*  
-  CGPS _tbeamgps;
+  
   CScheduler _scheduler;   
   CPinController _pincontroller;   
   CMagTorquer _magnetorquer;

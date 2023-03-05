@@ -24,10 +24,13 @@ void setup() {
   delay(4000);
   bs._keyboard.name(_KEYBOARD);
   bs._radio.name(_RADIO);
-  bs._phone.name(_PHONE);
-  bs._cloud.name(_CLOUD);
-  bs._msgpump.saveToCloud();
+  bs._tbeamgps.name(_GPS);
   bs._msgpump.name("PUMP");
+  
+  //bs._phone.name(_PHONE);
+  //bs._cloud.name(_CLOUD);
+  //bs._msgpump.saveToCloud();
+  
  //bs._ir_X1.name(_IRX1);
  //bs._magX.name(_MAGX);
  //bs._manager.name(_MANAGER);

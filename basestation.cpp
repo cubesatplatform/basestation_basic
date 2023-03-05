@@ -3,11 +3,13 @@
 CBaseStation::CBaseStation(){
   
   addSystem(&_keyboard);
-  addSystem(&_phone);
+  
   addSystem(&_msgpump);
   addSystem(&_radio);  
-  addSystem(&_cloud);
+  addSystem(&_tbeamgps);
   
+  //addSystem(&_cloud);
+  //addSystem(&_phone);
   //addSystem(&_scheduler);
   //addSystem(&_ir_X1);  
   //addSystem(&_manager);  
@@ -21,7 +23,7 @@ CBaseStation::CBaseStation(){
   //addSystem(&_magnetorquer);
  /*
           
-  //addSystem(&_tbeamgps);
+  
 
   _IMUI2C.name("IMUI");
   _IMUI2C.config(IMUADDRESS1,&Wire);
