@@ -6,12 +6,13 @@ CBaseStation::CBaseStation(){
   
   addSystem(&_msgpump);
   addSystem(&_radio);  
-  addSystem(&_tbeamgps);
+  //addSystem(&_tbeamgps);
   
-  //addSystem(&_cloud);
+  addSystem(&_cloud);
   //addSystem(&_phone);
   //addSystem(&_scheduler);
-  //addSystem(&_ir_X1);  
+  addSystem(&_ir_X1);  
+  _ir_X1.config(IRADDRESS);
   //addSystem(&_manager);  
   
   
@@ -38,7 +39,7 @@ CBaseStation::CBaseStation(){
   _magX.name(_MAGX);
 
   _motorX.config(MOTOR_SPEED,MOTOR_FG,MOTOR_DIR);
-  _ir_X1.config(IRADDRESS);
+  
   _motorX.config(2,14,13);
 */
 }

@@ -6,10 +6,10 @@
 #include <radio.h>
 #include <system_gps.h>
 
-//#include <cloud.h>
-//#include <phone.h>
+#include <cloud.h>
+#include <phone.h>
 
-//#include <system_irarray.h>
+#include <system_irarray.h>
 
 //#include <scheduler.h>
 //#include <system_mgr.h>
@@ -39,11 +39,11 @@ public:
   CMsgPump _msgpump;
   CGPS _tbeamgps;
 
-  //CPhone _phone;  
-  //CCloud _cloud;  
+  CPhone _phone;  
+  CCloud _cloud;  
   
   //CSystemMgr _manager;
-  //CIRArray _ir_X1;  
+  CIRArray _ir_X1;  
   //CMDrive _magX;
   //CTemperatureObject _tempX1;
   //CIMU _IMUI2C;   
