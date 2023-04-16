@@ -1,23 +1,38 @@
 #include "basestation.h"
-
+ 
 CBaseStation::CBaseStation(){
+  CMsg m;
+  m.set(_PIN,0);
+  _pins.addpin(m);
+  m.set(_PIN,2);
+  _pins.addpin(m);
   
+  addSystem(&_test);
+  addSystem(&_pins);
   addSystem(&_keyboard);
-  
+  addSystem(&_radio); 
   addSystem(&_msgpump);
-  addSystem(&_radio);  
+
+
+//_msgpump.saveToCloud(true);  
+  //addSystem(&_cloud);
   //addSystem(&_tbeamgps);
-  
-  addSystem(&_cloud);
+   
   //addSystem(&_phone);
   //addSystem(&_scheduler);
-  addSystem(&_ir_X1);  
-  _ir_X1.config(IRADDRESS);
-  //addSystem(&_manager);  
+
+  _scheduler.schedule(_SCHEDULER,"CLOUDDATAMAP", _GPS,300000);
+  
+ // addSystem(&_ir_X1);  
+ // _ir_X1.config(IRADDRESS);
+  addSystem(&_manager);  
   
   
   //addSystem(&_motorX); 
-  //addSystem(&_IMUI2C); 
+  addSystem(&_IMUI2C); 
+  _IMUI2C.name("IMUI");
+  _IMUI2C.config(IMUADDRESS1,&Wire);
+
   //_motorX.Mode(_LOCK);
   //addSystem(&_pincontroller);
   //addSystem(&_magX);
@@ -26,8 +41,6 @@ CBaseStation::CBaseStation(){
           
   
 
-  _IMUI2C.name("IMUI");
-  _IMUI2C.config(IMUADDRESS1,&Wire);
   
   _radio.setACK(false);
   _radio.name("RADIO");        

@@ -7,17 +7,23 @@ CBaseStation bs;
 
 
 void setup() {    
+  
   bs.name(SYSNAME); 
   bs.setIAM(bs.name());
   Serial.begin(1000000); 
   while(!Serial){};  
+  bs.initPins();
   delay(500);
 
-  Wire.begin(); 
-  Wire1.begin(); 
-  Wire2.begin(); 
+
 
   initBoard();  //New LilyGo boards
+
+  Wire.begin(); 
+  #if defined(ARDUINO_PORTENTA_H7_M4) || defined(ARDUINO_PORTENTA_H7_M7)
+    Wire1.begin(); 
+    Wire2.begin(); 
+  #endif
  
   writeconsoleln("Starting Basestation BASIC: ");      
 
@@ -32,12 +38,14 @@ void setup() {
   
   //bs._phone.name(_PHONE);
   bs._cloud.name(_CLOUD);
-  //bs._msgpump.saveToCloud();
+ bs._scheduler.name(_SCHEDULER);  
   
  bs._ir_X1.name(_IRX1);
  //bs._magX.name(_MAGX);
- //bs._manager.name(_MANAGER);
- //bs._scheduler.name(_SCHEDULER); 
+ bs._manager.name(_MANAGER);
+ bs._test.name("TEST"); 
+ bs._pins.name("PINS"); 
+ 
 }
 
 void loop(){  

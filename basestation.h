@@ -11,13 +11,14 @@
 
 #include <system_irarray.h>
 
-//#include <scheduler.h>
-//#include <system_mgr.h>
+#include <scheduler.h>
+#include <system_mgr.h>
 //#include <system_magtorquer.h>
 //#include <system_temperature.h>
-//#include <system_imu.h>
+#include <system_imu.h>
 //#include <fhmotor.h>
-//#include <cpins.h>
+#include <cpins.h>
+#include "test.h"
 
 #define IMUADDRESS1 BNO080_DEFAULT_ADDRESS    //==75
 #define IRADDRESS MLX90640_I2CADDR_DEFAULT
@@ -29,9 +30,9 @@
 
 #define CUBESAT "ADR1"
 
+  
 class CBaseStation:public CStateObj {
 private:
-  
 public:
   CKeyboard _keyboard;
   CRadio _radio;  
@@ -42,15 +43,17 @@ public:
   CPhone _phone;  
   CCloud _cloud;  
   
-  //CSystemMgr _manager;
+  CSystemMgr _manager;
+  CScheduler _scheduler;   
   CIRArray _ir_X1;  
-  //CMDrive _magX;
+ CMDrive _magX;
   //CTemperatureObject _tempX1;
-  //CIMU _IMUI2C;   
-  
+  CIMU _IMUI2C;  
+CTest _test;
+  CPins _pins;
   /*  
   
-  CScheduler _scheduler;   
+  
   CPinController _pincontroller;   
   CMagTorquer _magnetorquer;
   CMotorController _motorX;
