@@ -31,6 +31,7 @@ void setup() {
   bs._keyboard.name(_KEYBOARD);
   bs._radio.name(_RADIO);
   bs._tbeamgps.name(_GPS);
+
   bs._msgpump.name("PUMP");
 
   bs._radio.setTransmitter(true);

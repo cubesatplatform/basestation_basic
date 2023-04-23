@@ -49,7 +49,7 @@ public:
  CMDrive _magX;
   //CTemperatureObject _tempX1;
   CIMU _IMUI2C;  
-CTest _test;
+  CTest _test;
   CPins _pins;
   /*  
   
